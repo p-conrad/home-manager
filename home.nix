@@ -8,8 +8,6 @@
     username = "peter";
     homeDirectory = "/var/home/peter";
 
-    programs.home-manager.enable = true;
-
-    #stateVersion = "24.05";
+    stateVersion = "24.05";
   };
 }
