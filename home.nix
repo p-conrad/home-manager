@@ -6,7 +6,7 @@
     ];
 
     username = "peter";
-    homeDirectory = "/home/peter";
+    homeDirectory = "/var/home/peter";
 
     programs.home-manager.enable = true;
 
