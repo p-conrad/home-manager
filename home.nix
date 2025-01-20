@@ -10,4 +10,9 @@
 
     stateVersion = "24.05";
   };
+
+  programs = {
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+  };
 }
