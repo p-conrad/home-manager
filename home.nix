@@ -20,6 +20,7 @@
       userName = "Peter Conrad";
       userEmail = "p.conrad@proton.me";
       signing.key = "6AA3710873E3F85E5C00D5F58801DDE8A5AF9238";
+      difftastic.enable = true;
 
       aliases = {
         lg = "log --graph --pretty=format:'%C(bold blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --date-order";
