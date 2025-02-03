@@ -42,6 +42,18 @@
         rs = "restore";
         rsp = "restore -p";
       };
+
+      ignores = [
+        "*~"
+        "*.sw[pon]"
+        "*.log"
+        "*.tmp"
+        ".DS_Store"
+        ".env"
+        "node_modules/"
+        "__pycache__/"
+        "*.py[cod]"
+      ];
     };
   };
 }
