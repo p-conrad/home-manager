@@ -2,7 +2,7 @@
 {
   home = {
     packages = with pkgs; [
-      hello
+      gnumake
     ];
 
     username = "peter";
