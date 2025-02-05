@@ -15,6 +15,14 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      autocd = true;
+      autosuggestions.enable = true;
+
+    };
+
     git = {
       enable = true;
       userName = "Peter Conrad";
