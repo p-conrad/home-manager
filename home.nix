@@ -15,12 +15,29 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    autojump = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    command-not-found.enable = true;
+
     zsh = {
       enable = true;
       enableCompletion = true;
       autocd = true;
-      autosuggestions.enable = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+      syntaxHighlighting.highlighters = [ "main" "brackets" ];
 
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "colored-man-pages"
+        ];
+      };
+
+      initExtra = builtins.readFile(./zsh/init_extra.sh);
     };
 
     git = {
