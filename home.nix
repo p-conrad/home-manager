@@ -3,6 +3,13 @@
   home = {
     packages = with pkgs; [
       gnumake
+      imagemagick_light   # required by the catimg zsh plugin
+      #fortune             # required by the hitchhiker zsh plugin
+      #cowsay              # required by the hitchhiker zsh plugin
+      nmap                # (also) required by the nmap zsh plugin
+      #pass-wayland
+      #passExtensions.pass-update
+      #passExtensions.pass-otp
     ];
 
     username = "peter";
@@ -21,6 +28,7 @@
     };
 
     command-not-found.enable = true;
+    fzf.enable = true;
 
     zsh = {
       enable = true;
@@ -33,7 +41,21 @@
       oh-my-zsh = {
         enable = true;
         plugins = [
+          "aliases"
+          "branch"
+          "catimg"
           "colored-man-pages"
+          "copybuffer"
+          "copyfile"
+          "copypath"
+          "dircycle"
+          "extract"
+          "fasd"
+          "git-prompt"
+          "gitignore"
+          #"hitchhiker"
+          "nmap"
+          "pass"
         ];
       };
 
