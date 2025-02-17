@@ -29,6 +29,7 @@
 
     command-not-found.enable = true;
     fzf.enable = true;
+    starship.enable = true;
 
     zsh = {
       enable = true;
@@ -42,7 +43,6 @@
         enable = true;
         plugins = [
           "aliases"
-          "branch"
           "catimg"
           "colored-man-pages"
           "copybuffer"
@@ -51,7 +51,6 @@
           "dircycle"
           "extract"
           "fasd"
-          "git-prompt"
           "gitignore"
           #"hitchhiker"
           "nmap"
