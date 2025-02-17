@@ -54,7 +54,7 @@
           "gitignore"
           #"hitchhiker"
           "nmap"
-          "pass"
+          #"pass"
         ];
       };
 
