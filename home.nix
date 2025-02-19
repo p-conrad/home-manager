@@ -10,6 +10,7 @@
       #pass-wayland
       #passExtensions.pass-update
       #passExtensions.pass-otp
+      tlrc
     ];
 
     username = "peter";
@@ -30,6 +31,7 @@
     command-not-found.enable = true;
     fzf.enable = true;
     starship.enable = true;
+    thefuck.enable = true;
 
     zsh = {
       enable = true;
@@ -53,8 +55,14 @@
           "fasd"
           "gitignore"
           #"hitchhiker"
+          "magic-enter"
+          "man"
           "nmap"
           #"pass"
+          "systemadmin"
+          "systemd"
+          "thefuck"
+          "tldr"
         ];
       };
 
