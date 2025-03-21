@@ -78,12 +78,31 @@
       difftastic.enable = true;
 
       extraConfig = {
+        branch.sort = "-committerdate";
+        commit.verbose = true;
+        "url \"git@github.com:\"".insteadOf = "https://github.com/";
+        "url \"git@git.sr.ht:\"".insteadOf = "sh:";
+        "url \"git@git.sr.ht:~p-conrad/\"".insteadOf = "shp:";
         "difftool \"difftastic\"" = {
           cmd = "${pkgs.difftastic}/bin/difft \"$MERGED\" \"$LOCAL\" \"abcdef1\" \"100644\" \"$REMOTE\" \"abcdef2\" \"100644\"";
         };
-        difftool.prompt = false;
-        pager.difftool = true;
+        diff.algorithm = "histogram";
         diff.tool = "difftastic";
+        difftool.prompt = false;
+        diff.submodule = "log";
+        help.autocorrect = 15;
+        merge.conflictstyle = "zdiff3";
+        pager.difftool = true;
+        push.autoSetupRemote = true;
+        push.followtags = true;
+        rebase.autosquash = true;
+        rebase.autostash = true;
+        rerere.enabled = true;
+        submodule.recurse = true;
+        status.submoduleSummary = true;
+        transfer.fsckobjects = true;
+        fetch.fsckobjects = true;
+        receive.fsckobjects = true;
       };
 
       aliases = {
