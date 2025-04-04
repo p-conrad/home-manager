@@ -18,3 +18,4 @@ pathadd() {
     fi
 }
 
+pathadd ~/.local/bin
