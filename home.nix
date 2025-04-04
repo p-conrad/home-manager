@@ -28,6 +28,31 @@
       enableZshIntegration = true;
     };
 
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+
+      plugins = with pkgs.vimPlugins; [
+        nvim-lspconfig
+        Rename
+
+        # some more to check out in the future:
+        # mini-nvim
+        # nvim-treesitter.withAllGrammars
+        # renamer
+
+        # color schemes
+        vim-one
+        papercolor-theme
+        nvim-solarized-lua
+        catppuccin-nvim
+      ];
+    };
+
+    # shell configuration, including zsh
     command-not-found.enable = true;
     fzf.enable = true;
     starship.enable = true;
