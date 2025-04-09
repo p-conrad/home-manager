@@ -66,6 +66,10 @@
       syntaxHighlighting.enable = true;
       syntaxHighlighting.highlighters = [ "main" "brackets" ];
 
+      shellAliases = {
+        nix-shell = "nix-shell --command ${pkgs.zsh}/bin/zsh"
+      };
+
       oh-my-zsh = {
         enable = true;
         plugins = [
