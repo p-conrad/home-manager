@@ -68,7 +68,7 @@
       syntaxHighlighting.highlighters = [ "main" "brackets" ];
 
       shellAliases = {
-        nix-shell = "nix-shell --command ${pkgs.zsh}/bin/zsh"
+        nix-shell = "nix-shell --command ${pkgs.zsh}/bin/zsh";
       };
 
       oh-my-zsh = {
