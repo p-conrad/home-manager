@@ -1,5 +1,9 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, nixgl, ... }:
 {
+  nixGL.packages = import nixgl { inherit pkgs; };
+  nixGL.defaultWrapper = "mesa";
+  nixGL.installScripts = [ "mesa" ];
+
   home = {
     packages = with pkgs; [
       gnumake
@@ -26,6 +30,30 @@
     autojump = {
       enable = true;
       enableZshIntegration = true;
+    };
+
+    neovide = {
+        enable = true;
+        package = config.lib.nixGL.wrap pkgs.neovide;
+        settings = {
+            fork = true;
+            frame = "full";
+            idle = true;
+            maximized = false;
+            neovim-bin = "${pkgs.neovim}/bin/nvim";
+            no-multigrid = false;
+            srgb = false;
+            tabs = false;
+            theme = "auto";
+            title-hidden = true;
+            vsync = true;
+            wsl = false;
+
+            font = {
+                normal = [];
+                size = 12;
+            };
+        };
     };
 
     neovim = {

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixgl.url = "github:nix-community/nixGL";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -10,7 +11,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixgl, nixpkgs, home-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -20,6 +21,10 @@
         peter = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ ./home.nix ];
+
+          extraSpecialArgs = {
+            inherit nixgl;
+          };
         };
       };
     };
