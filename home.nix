@@ -34,6 +34,7 @@
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      extraLuaConfig = builtins.readFile(./nvim/init.lua);
 
       plugins = with pkgs.vimPlugins; [
         nvim-lspconfig
