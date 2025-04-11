@@ -37,11 +37,11 @@
 
       plugins = with pkgs.vimPlugins; [
         nvim-lspconfig
+        nvim-treesitter.withAllGrammars
         Rename
 
         # some more to check out in the future:
         # mini-nvim
-        # nvim-treesitter.withAllGrammars
         # renamer
 
         # color schemes
