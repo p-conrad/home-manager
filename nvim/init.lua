@@ -18,7 +18,8 @@ if not ok then
     vim.notify("Colorscheme " .. colorscheme .. " not found!")
 end
 vim.opt.background = "light"
-vim.opt.guifont = "Cascadia Code,Fira Code,Hack,DejaVu Sans Mono,Inconsolata,Menlo:h11"
+--vim.opt.guifont = "Cascadia Code,Fira Code,Hack,DejaVu Sans Mono,Inconsolata,Menlo:h11"
+vim.opt.guifont = "Cascadia Code:h11"
 vim.opt.linespace = 2
 
 -- hybrid line numbering with automatic toggling
@@ -36,6 +37,15 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
     group = num_toggle,
     command = "set norelativenumber"
 })
+
+-- configuration specific to Neovide
+if vim.g.neovide then
+    vim.g.neovide_cursor_animation_length = 0
+    -- use a shorter trail if we enable cursor animation
+    vim.g.neovide_cursor_trail_size = 0.2
+    vim.g.neovide_hide_mouse_when_typing = true
+    vim.g.neovide_scroll_animation_length = 0.1
+end
 
 
 -- leader settings

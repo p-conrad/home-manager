@@ -68,6 +68,7 @@
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         Rename
+        lualine-nvim
 
         # some more to check out in the future:
         # mini-nvim
