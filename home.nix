@@ -40,7 +40,6 @@
             frame = "full";
             idle = true;
             maximized = false;
-            neovim-bin = "${pkgs.neovim}/bin/nvim";
             no-multigrid = false;
             srgb = false;
             tabs = false;
