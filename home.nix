@@ -17,6 +17,8 @@
       tlrc
     ];
 
+    shell.enableZshIntegration = true;
+
     username = "peter";
     homeDirectory = "/var/home/peter";
 
@@ -26,11 +28,6 @@
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
-    autojump = {
-      enable = true;
-      enableZshIntegration = true;
-    };
 
     neovide = {
         enable = true;
@@ -86,9 +83,21 @@
       ];
     };
 
-    # shell configuration, including zsh
-    command-not-found.enable = true;
+    # generally useful tools
+    bat.enable = true;
+    eza = {
+        enable = true;
+        colors = "auto";
+        icons = "auto";
+    };
+    fd.enable = true;
     fzf.enable = true;
+    jq.enable = true;
+    ripgrep.enable = true;
+
+    # shell configuration, including zsh
+    autojump.enable = true;
+    command-not-found.enable = true;
     starship.enable = true;
     thefuck.enable = true;
 
