@@ -67,7 +67,12 @@
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         Rename
-        lualine-nvim
+
+        nvim-web-devicons
+        {
+            plugin = lualine-nvim;
+            config = "lua require('lualine').setup()";
+        }
 
         # some more to check out in the future:
         # mini-nvim
