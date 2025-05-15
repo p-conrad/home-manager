@@ -70,6 +70,12 @@
             plugin = lualine-nvim;
             config = "lua require('lualine').setup()";
         }
+        {
+            plugin = dashboard-nvim;
+            config = "lua << END\n"
+                + builtins.readFile(./nvim/dashboard.lua)
+                + "\nEND";
+        }
 
         # some more to check out in the future:
         # mini-nvim
