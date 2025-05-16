@@ -60,7 +60,11 @@
       vimdiffAlias = true;
       extraLuaConfig = builtins.readFile(./nvim/init.lua);
 
-      extraPackages = [ pkgs.wl-clipboard ];
+      extraPackages = with pkgs; [
+        fd
+        ripgrep
+        wl-clipboard
+      ];
 
       plugins = with pkgs.vimPlugins; [
         nvim-lspconfig
@@ -76,6 +80,13 @@
           plugin = dashboard-nvim;
           config = "lua << END\n"
             + builtins.readFile(./nvim/dashboard.lua)
+            + "\nEND";
+        }
+        plenary-nvim
+        {
+          plugin = telescope-nvim;
+          config = "lua << END\n"
+            + builtins.readFile(./nvim/telescope.lua)
             + "\nEND";
         }
 
