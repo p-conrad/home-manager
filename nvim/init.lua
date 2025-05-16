@@ -9,6 +9,7 @@ vim.opt.wildignore:append(
     { "*.o", "*.so", "*.a", "*.swp", "*.zip", "*.gz", "*.xz", "*/node_modules/*",
     "*/.cache/*", "*/__pycache__/*", "*.pyc", "*.pyo", "*.class", "*/.git/*" })
 vim.opt.wildmode = { "longest:list", "full" }
+vim.opt.clipboard:append("unnamedplus")
 
 
 -- appearance and statusline (TODO)

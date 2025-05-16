@@ -60,6 +60,8 @@
       vimdiffAlias = true;
       extraLuaConfig = builtins.readFile(./nvim/init.lua);
 
+      extraPackages = [ pkgs.wl-clipboard ];
+
       plugins = with pkgs.vimPlugins; [
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
