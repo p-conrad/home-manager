@@ -30,26 +30,26 @@
     home-manager.enable = true;
 
     neovide = {
-        enable = true;
-        package = config.lib.nixGL.wrap pkgs.neovide;
-        settings = {
-            fork = true;
-            frame = "full";
-            idle = true;
-            maximized = false;
-            no-multigrid = false;
-            srgb = false;
-            tabs = false;
-            theme = "auto";
-            title-hidden = true;
-            vsync = true;
-            wsl = false;
+      enable = true;
+      package = config.lib.nixGL.wrap pkgs.neovide;
+      settings = {
+        fork = true;
+        frame = "full";
+        idle = true;
+        maximized = false;
+        no-multigrid = false;
+        srgb = false;
+        tabs = false;
+        theme = "auto";
+        title-hidden = true;
+        vsync = true;
+        wsl = false;
 
-            font = {
-                normal = [];
-                size = 12;
-            };
+        font = {
+          normal = [];
+          size = 12;
         };
+      };
     };
 
     neovim = {
@@ -69,14 +69,14 @@
 
         nvim-web-devicons
         {
-            plugin = lualine-nvim;
-            config = "lua require('lualine').setup()";
+          plugin = lualine-nvim;
+          config = "lua require('lualine').setup()";
         }
         {
-            plugin = dashboard-nvim;
-            config = "lua << END\n"
-                + builtins.readFile(./nvim/dashboard.lua)
-                + "\nEND";
+          plugin = dashboard-nvim;
+          config = "lua << END\n"
+            + builtins.readFile(./nvim/dashboard.lua)
+            + "\nEND";
         }
 
         # some more to check out in the future:
@@ -94,9 +94,9 @@
     # generally useful tools
     bat.enable = true;
     eza = {
-        enable = true;
-        colors = "auto";
-        icons = "auto";
+      enable = true;
+      colors = "auto";
+      icons = "auto";
     };
     fd.enable = true;
     fzf.enable = true;
