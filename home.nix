@@ -52,7 +52,12 @@
       };
     };
 
-    neovim = {
+    neovim = let
+      luaPlug = name: config: {
+        plugin = name;
+        config = "lua << END\n" + builtins.readFile config + "END";
+      };
+    in {
       enable = true;
       defaultEditor = true;
       viAlias = true;
@@ -76,19 +81,10 @@
           plugin = lualine-nvim;
           config = "lua require('lualine').setup()";
         }
-        {
-          plugin = dashboard-nvim;
-          config = "lua << END\n"
-            + builtins.readFile(./nvim/dashboard.lua)
-            + "\nEND";
-        }
+        (luaPlug dashboard-nvim ./nvim/dashboard.lua)
         plenary-nvim
-        {
-          plugin = telescope-nvim;
-          config = "lua << END\n"
-            + builtins.readFile(./nvim/telescope.lua)
-            + "\nEND";
-        }
+        (luaPlug telescope-nvim ./nvim/telescope.lua)
+        (luaPlug orgmode ./nvim/orgmode.lua)
 
         # some more to check out in the future:
         # mini-nvim
