@@ -72,6 +72,23 @@
       ];
 
       plugins = with pkgs.vimPlugins; [
+        {
+          # Null plugin, just sets leader keys as workaround for home-manager's
+          # neovim module which puts plugin config on top of the init file.
+          # Must be on top so it's the first thing written to init.vim
+          # NOTE: this might get fixed in a future release (check again)
+          plugin = pkgs.stdenv.mkDerivation {
+            name = "vim-plugin-set-leader-keys-to-space";
+            src = ./nvim/empty;
+            installPhase = ''
+              cp -r $src $out
+              '';
+          };
+          config = ''
+            let g:mapleader = ' '
+            let g:maplocalleader = ' '
+            '';
+        }
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         Rename
