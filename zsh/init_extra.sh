@@ -19,3 +19,18 @@ pathadd() {
 }
 
 pathadd ~/.local/bin
+
+# fix PDF files for using with stupid outdated printing devices
+pfix() {
+    if [[ $# -lt 1 ]]; then
+        echo "No arguments provided"
+        exit 1
+    fi
+    mkdir -p pfix
+    for f in "${@}"; do
+        filename=${f%.*}
+        pdf2ps $f ${filename}.ps
+        ps2pdf12 ${filename}.ps pfix/${filename}.pdf
+        rm ${filename}.ps
+    done
+}
