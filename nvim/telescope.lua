@@ -1,12 +1,41 @@
+local actions = require("telescope.actions")
+local layout = require("telescope.actions.layout")
+
 require("telescope").setup {
   defaults = {
     mappings = {
       i = {
         ["<C-h>"] = "which_key",
-      }
-    }
+        -- clear prompt rather than scrolling the preview, clearing the other
+        -- movements as well for consistency
+        ["<C-u>"] = false,
+        ["<C-d>"] = false,
+        ["<C-f>"] = false,
+        ["<C-k>"] = false,
+        -- close rather than going into normal mode
+        ["<esc>"] = actions.close,
+        -- remap some keys to make them more intuitive and to account for
+        -- the deleted C-u above
+        ["<M-n>"] = actions.preview_scrolling_down,
+        ["<M-r>"] = actions.preview_scrolling_up,
+        ["<M-s>"] = actions.preview_scrolling_left,
+        ["<M-t>"] = actions.preview_scrolling_right,
+        ["<C-b>"] = actions.results_scrolling_left,
+        ["<C-f>"] = actions.results_scrolling_right,
+        -- toggle the preview
+        ["<M-p>"] = layout.toggle_preview,
+      },
+    },
   },
-  pickers = {},
+  pickers = {
+    buffers = {
+      mappings = {
+        i = {
+          ["<M-d>"] = actions.delete_buffer + actions.move_to_top,
+        },
+      },
+    },
+  },
   extensions = {},
 }
 
