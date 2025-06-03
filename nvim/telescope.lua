@@ -39,13 +39,23 @@ require("telescope").setup {
   extensions = {},
 }
 
+function project_files()
+  -- fall back to find_files if git_files fails
+  local builtin = require("telescope.builtin")
+  local opts = {}
+  local ok = pcall(builtin.git_files, opts)
+  if not ok then
+    builtin.find_files(opts)
+  end
+end
+
 -- keymap settings
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Telescope all commands" })
 vim.keymap.set("n", "<leader>fC", builtin.command_history, { desc = "Telescope command history" })
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-vim.keymap.set("n", "<leader>fF", builtin.git_files, { desc = "Telescope find git files" })
+vim.keymap.set("n", "<leader>ff", project_files, { desc = "Telescope find project files" })
+vim.keymap.set("n", "<leader>fF", builtin.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>fgb", builtin.git_branches, { desc = "Telescope git branches" })
 vim.keymap.set("n", "<leader>fgB", builtin.git_bcommits, { desc = "Telescope git blame" })
 vim.keymap.set("v", "<leader>fgB", builtin.git_bcommits_range, { desc = "Telescope git blame (selected lines)" })
@@ -67,6 +77,6 @@ vim.keymap.set("n", "<leader>ft", builtin.colorscheme, { desc = "Telescope color
 vim.keymap.set("n", "<leader>fT", builtin.filetypes, { desc = "Telescope filetypes" })
 vim.keymap.set("n", "<leader>fv", builtin.vim_options, { desc = "Telescope vim options" })
 
-vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
+vim.keymap.set("n", "<C-p>", project_files, { desc = "Telescope find project files" })
 vim.keymap.set("n", "<C-b>", builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>*", builtin.grep_string, { desc = "Telescope search string under cursor" })
