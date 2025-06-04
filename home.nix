@@ -130,8 +130,8 @@
     # shell configuration, including zsh
     autojump.enable = true;
     command-not-found.enable = true;
+    pay-respects.enable = true;
     starship.enable = true;
-    thefuck.enable = true;
 
     zsh = {
       enable = true;
@@ -165,13 +165,12 @@
           #"pass"
           "systemadmin"
           "systemd"
-          "thefuck"
           "tldr"
           "universalarchive"
         ];
       };
 
-      initExtra = builtins.readFile(./zsh/init_extra.sh);
+      initContent = builtins.readFile(./zsh/init_extra.sh);
     };
 
     git = {
