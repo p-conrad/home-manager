@@ -34,3 +34,8 @@ pfix() {
         rm ${filename}.ps
     done
 }
+
+# Fedora rpm-ostree alias with 'status' as default
+rost() {
+    rpm-ostree ${@:-status}
+}
