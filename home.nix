@@ -128,10 +128,13 @@
     ripgrep.enable = true;
 
     # shell configuration, including zsh
-    autojump.enable = true;
     command-not-found.enable = true;
     pay-respects.enable = true;
     starship.enable = true;
+    zoxide = {
+        enable = true;
+        options = [ "--cmd j" ];
+    };
 
     zsh = {
       enable = true;
@@ -156,7 +159,6 @@
           "copypath"
           "dircycle"
           "extract"
-          "fasd"
           "gitignore"
           #"hitchhiker"
           "magic-enter"
