@@ -146,6 +146,7 @@
 
       shellAliases = {
         nix-shell = "nix-shell --command ${pkgs.zsh}/bin/zsh";
+        nvd = "neovide";
       };
 
       oh-my-zsh = {
