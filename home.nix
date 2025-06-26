@@ -14,7 +14,11 @@
       #pass-wayland
       #passExtensions.pass-update
       #passExtensions.pass-otp
+      p7zip     # optional dependency for yazi
+      poppler   # optional dependency for yazi
+      resvg     # optional dependency for yazi
       tlrc
+      wl-clipboard
     ];
 
     shell.enableZshIntegration = true;
@@ -89,6 +93,7 @@
             let g:maplocalleader = ' '
             '';
         }
+
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         Rename
@@ -127,13 +132,47 @@
     jq.enable = true;
     ripgrep.enable = true;
 
+    yazi = {
+      enable = true;
+
+      keymap = {
+        mgr.prepend_keymap = [
+          { on = [ "n" ], run = "arrow next", desc = "Next file" }
+          { on = [ "r" ], run = "arrow prev", desc = "Previous file" }
+          { on = [ "s" ], run = "leave", desc = "Back to the parent directory" }
+          { on = [ "t" ], run = "enter", desc = "Enter the child directory" }
+          { on = [ "N" ], run = "seek -5", desc = "Seek up 5 units in the preview" }
+          { on = [ "R" ], run = "seek 5", desc = "Seek down 5 units in the preview" }
+          { on = [ "S" ], run = "back", desc = "Back to previous directory" }
+          { on = [ "T" ], run = "forward", desc = "Forward to next directory" }
+
+          # replaces "r" for renaming, with some more useful bindings
+          { on = [ "a" ], run = "rename --cursor=before_ext", desc = "Rename selected file(s)" }
+          { on = [ "A" ], run = "rename --cursor=end", desc = "Rename selected file(s) from end" }
+          { on = [ "i" ], run = "rename --cursor=start", desc = "Rename selected file(s) from start" }
+          { on = [ "I" ], run = "rename --empty=stem --cursor=start", desc = "Rename selected file(s), clearing the name" }
+
+          # replaces "a" for creating (create [e]mpty file/dir)
+          { on = [ "e" ], run = "create", desc = "Create a file or directory" }
+
+          # replaces "s" for searching ([l]ocate)
+          { on = [ "l" ], run = "search --via=fd", desc = "Search files by name via fd" }
+          { on = [ "L" ], run = "search --via=rg", desc = "Search files by content via ripgrep" }
+
+          # replaces "n/N" for moving between search results
+          { on = [ "j" ], run = "find_arrow", desc = "Next found" }
+          { on = [ "J" ], run = "find_arrow --previous", desc = "Previous found" }
+        ];
+      };
+    };
+
     # shell configuration, including zsh
     command-not-found.enable = true;
     pay-respects.enable = true;
     starship.enable = true;
     zoxide = {
-        enable = true;
-        options = [ "--cmd j" ];
+      enable = true;
+      options = [ "--cmd j" ];
     };
 
     zsh = {
