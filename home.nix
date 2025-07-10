@@ -186,6 +186,24 @@
       shellAliases = {
         nix-shell = "nix-shell --command ${pkgs.zsh}/bin/zsh";
         nvd = "neovide";
+
+        g = "git";
+        ga = "git add";
+        gai = "git add --interactive";
+        gap = "git add --patch";
+        gc = "git commit";
+        gcm = "git commit -m";
+        gd = "git diff";
+        gds = "git diff --staged";
+        gf = "git fetch";
+        gfa = "git fetch --all";
+        glg = "git lg";
+        glga = "git lga";
+        gp = "git push";
+        gpf = "git push --force";
+        gr = "git restore";
+        gs = "git status";
+        gst = "git status --short --branch";
       };
 
       oh-my-zsh = {
@@ -251,28 +269,35 @@
       };
 
       aliases = {
+        a = "add";
+        ai = "add --interactive";
+        ap = "add --patch";
+        c = "commit";
+        ca = "commit --amend";
+        car = "commit --amend --reuse-message=HEAD";
+        co = "checkout";
+        cob = "checkout -b";
+        d = "diff";
+        ds = "diff --staged";
+        did = "diff --no-ext-diff";
+        f = "fetch";
+        fa = "fetch --all";
+        glog = "log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"";
         lg = "log --graph --pretty=format:'%C(bold blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --date-order";
         lga = "log --graph --pretty=format:'%C(bold blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --date-order --all";
-        glog = "log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"";
+        lp = "log --patch";
+        p = "push";
+        pa = "push --all";
+        pf = "push --force";
+        rs = "restore";
+        rss = "restore --staged";
+        rsp = "restore --patch";
+        rssp = "restore --staged --patch";
         s = "status";
         st = "status --short --branch";
         stsh = "stash --keep-index";
         staash = "stash --include-untracked";
         staaash = "stash --all";
-        d = "diff";
-        ds = "diff --staged";
-        did = "diff --no-ext-diff";
-        c = "commit";
-        ca = "commit --amend";
-        cr = "commit --reuse-message=ORIG_HEAD";
-        f = "fetch";
-        fa = "fetch --all";
-        p = "push";
-        pa = "push --all";
-        a = "add";
-        ap = "add -p";
-        rs = "restore";
-        rsp = "restore -p";
       };
 
       ignores = [
