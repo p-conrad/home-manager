@@ -7,7 +7,7 @@
   home = {
     packages = with pkgs; [
       gnumake
-      imagemagick_light   # required by the catimg zsh plugin
+      imagemagick   # required by the catimg zsh plugin
       #fortune             # required by the hitchhiker zsh plugin
       #cowsay              # required by the hitchhiker zsh plugin
       nmap                # (also) required by the nmap zsh plugin
