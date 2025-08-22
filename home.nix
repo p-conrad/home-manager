@@ -255,6 +255,7 @@
         diff.submodule = "log";
         help.autocorrect = 15;
         merge.conflictstyle = "zdiff3";
+        merge.tool = "vimdiff";
         pager.difftool = true;
         push.autoSetupRemote = true;
         push.followtags = true;
