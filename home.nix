@@ -1,10 +1,16 @@
 { config, lib, pkgs, nixgl, ... }:
 {
-  nixGL.packages = import nixgl { inherit pkgs; };
-  nixGL.defaultWrapper = "mesa";
-  nixGL.installScripts = [ "mesa" ];
+  targets.genericLinux = {
+    nixGL.packages = import nixgl { inherit pkgs; };
+    nixGL.defaultWrapper = "mesa";
+    nixGL.installScripts = [ "mesa" ];
+  };
 
   home = {
+    username = "peter";
+    homeDirectory = "/var/home/peter";
+    stateVersion = "25.11";
+
     packages = with pkgs; [
       gnumake
       imagemagick   # required by the catimg zsh plugin
@@ -22,11 +28,6 @@
     ];
 
     shell.enableZshIntegration = true;
-
-    username = "peter";
-    homeDirectory = "/var/home/peter";
-
-    stateVersion = "24.05";
   };
 
   programs = {
@@ -233,25 +234,25 @@
       initContent = builtins.readFile(./zsh/init_extra.sh);
     };
 
+    difftastic = {
+      enable = true;
+      git.enable = true;
+      git.diffToolMode = true;
+    };
+
     git = {
       enable = true;
-      userName = "Peter Conrad";
-      userEmail = "p.conrad@proton.me";
-      signing.key = "6AA3710873E3F85E5C00D5F58801DDE8A5AF9238";
-      difftastic.enable = true;
 
-      extraConfig = {
+      settings = {
+        user.name = "Peter Conrad";
+        user.email = "p.conrad@proton.me";
+        signing.key = "6AA3710873E3F85E5C00D5F58801DDE8A5AF9238";
+
         branch.sort = "-committerdate";
         commit.verbose = true;
-        "url \"git@github.com:\"".insteadOf = "https://github.com/";
-        "url \"git@git.sr.ht:\"".insteadOf = "sh:";
-        "url \"git@git.sr.ht:~p-conrad/\"".insteadOf = "shp:";
-        "difftool \"difftastic\"" = {
-          cmd = "${pkgs.difftastic}/bin/difft \"$MERGED\" \"$LOCAL\" \"abcdef1\" \"100644\" \"$REMOTE\" \"abcdef2\" \"100644\"";
-        };
-        diff.algorithm = "histogram";
-        diff.tool = "difftastic";
+
         difftool.prompt = false;
+        diff.algorithm = "histogram";
         diff.submodule = "log";
         help.autocorrect = 15;
         merge.conflictstyle = "zdiff3";
@@ -267,39 +268,45 @@
         transfer.fsckobjects = true;
         fetch.fsckobjects = true;
         receive.fsckobjects = true;
+
+        # auto-conversion HTTPS -> SSH + some convenience
+        "url \"git@github.com:\"".insteadOf = "https://github.com/";
+        "url \"git@git.sr.ht:\"".insteadOf = "sh:";
+        "url \"git@git.sr.ht:~p-conrad/\"".insteadOf = "shp:";
+
+        alias = {
+          a = "add";
+          ai = "add --interactive";
+          ap = "add --patch";
+          c = "commit";
+          ca = "commit --amend";
+          car = "commit --amend --reuse-message=HEAD";
+          co = "checkout";
+          cob = "checkout -b";
+          d = "diff";
+          ds = "diff --staged";
+          did = "diff --no-ext-diff";
+          f = "fetch";
+          fa = "fetch --all";
+          glog = "log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"";
+          lg = "log --graph --pretty=format:'%C(bold blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --date-order";
+          lga = "log --graph --pretty=format:'%C(bold blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --date-order --all";
+          lp = "log --patch";
+          p = "push";
+          pa = "push --all";
+          pf = "push --force";
+          rs = "restore";
+          rss = "restore --staged";
+          rsp = "restore --patch";
+          rssp = "restore --staged --patch";
+          s = "status";
+          st = "status --short --branch";
+          stsh = "stash --keep-index";
+          staash = "stash --include-untracked";
+          staaash = "stash --all";
+        };
       };
 
-      aliases = {
-        a = "add";
-        ai = "add --interactive";
-        ap = "add --patch";
-        c = "commit";
-        ca = "commit --amend";
-        car = "commit --amend --reuse-message=HEAD";
-        co = "checkout";
-        cob = "checkout -b";
-        d = "diff";
-        ds = "diff --staged";
-        did = "diff --no-ext-diff";
-        f = "fetch";
-        fa = "fetch --all";
-        glog = "log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"";
-        lg = "log --graph --pretty=format:'%C(bold blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --date-order";
-        lga = "log --graph --pretty=format:'%C(bold blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --date-order --all";
-        lp = "log --patch";
-        p = "push";
-        pa = "push --all";
-        pf = "push --force";
-        rs = "restore";
-        rss = "restore --staged";
-        rsp = "restore --patch";
-        rssp = "restore --staged --patch";
-        s = "status";
-        st = "status --short --branch";
-        stsh = "stash --keep-index";
-        staash = "stash --include-untracked";
-        staaash = "stash --all";
-      };
 
       ignores = [
         "*~"
