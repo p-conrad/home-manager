@@ -1,0 +1,74 @@
+# if not running interactively, don't do anything
+if [[ $- != *i* ]] ; then
+    return
+fi
+
+# switch to ZSH if we are in the Nix toolbox and not opening a Nix shell
+if [[ -f /run/.toolboxenv ]] && [[ -x $(command -v zsh) ]] && ! [[ -v IN_NIX_SHELL ]]; then
+    exec zsh
+fi
+
+# source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# defaults
+export EDITOR=vi
+export VISUAL=vi
+
+# allow for easy path appending
+# https://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
+pathadd() {
+    local p
+    if [ "$#" = "0" ]; then
+        if [ -d "node_modules" ] && command -v npm &> /dev/null; then
+            echo "Using local node_modules folder"
+            p=$(readlink -f "$(npm bin)")
+        else
+            echo "No arguments provided"
+            return 1
+        fi
+    else
+        p=$(readlink -f "$1")
+    fi
+    if [ -d "$p" ] && [[ ":$PATH:" != *":$p:"* ]]; then
+        PATH="$p${PATH:+":$PATH"}"
+    fi
+}
+
+# add local bin to PATH
+pathadd ~/.local/bin
+
+# ex - archive extractor
+ex() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1   ;;
+            *.tar.gz)    tar xzf $1   ;;
+            *.bz2)       bunzip2 $1   ;;
+            *.rar)       unrar x $1     ;;
+            *.gz)        gunzip $1    ;;
+            *.tar)       tar xf $1    ;;
+            *.tbz2)      tar xjf $1   ;;
+            *.tgz)       tar xzf $1   ;;
+            *.zip)       unzip $1     ;;
+            *.Z)         uncompress $1;;
+            *.7z)        7z x $1      ;;
+            *)           echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# history setup with bigger history and instant saving
+shopt -s histappend
+HISTCONTROL=ignoreboth
+export HISTSIZE=10000
+export HISTFILESIZE=50000
+HISTTIMEFORMAT="[%F %T] "
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# trim long paths on the prompt
+PROMPT_DIRTRIM=3

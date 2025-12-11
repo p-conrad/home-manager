@@ -27,6 +27,20 @@
       wl-clipboard
     ];
 
+    file = {
+      # We don't setup Bash explicitly as we are using Zsh. However, since Bash
+      # is the default on Fedora Atomic and installing Zsh with home-manager
+      # won't allow us to use chsh easily, we add add a basic config file here,
+      # featuring automatic switching to Zsh when available, and a handful of
+      # convenient Bash settings otherwise.
+      # Unfortunately, this is not working, since even with mkOutOfStoreSymlink,
+      # Nix still insists on putting the symlink itself in /nix, which is not
+      # available outside the toolbox. So for now, we keep this commented out
+      # for future reference, resorting to manual linking while still keeping
+      # the config itself in this repository.
+      # ".bashrc".source = config.lib.file.mkOutOfStoreSymlink ./configs/bashrc_nix;
+    };
+
     shell.enableZshIntegration = true;
   };
 
